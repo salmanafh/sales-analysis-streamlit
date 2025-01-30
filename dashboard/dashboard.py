@@ -2,8 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
-import geopandas as gpd
-from babel.numbers import format_currency
+# import geopandas as gpd
+# from babel.numbers import format_currency
 
 def main():
     st.set_page_config(layout="wide", page_title="E-Commerce Sales Dashboard", page_icon=":bar_chart:")
@@ -58,7 +58,7 @@ def main():
 
     with col2:
         total_daily_payment = all_df.groupby(by="order_purchase_timestamp").payment_value.sum().reset_index()
-        total_daily_payment = format_currency(total_daily_payment["payment_value"].sum(), 'BRL', locale='pt_BR')
+        # total_daily_payment = format_currency(total_daily_payment["payment_value"].sum(), 'BRL', locale='pt_BR')
         st.metric(label="Total Revenue", value=total_daily_payment)
 
     visualize(data=all_df,
@@ -177,8 +177,8 @@ def main():
         st.metric(label="Recency", value="{:,.2f} days".format(recency_df["recency"].mean()))
     with col2:
         st.metric(label="Frequency", value="{:,.2f}".format(frequency_df["frequency"].mean()))
-    with col3:
-        st.metric(label="Monetary", value=format_currency(monetary_df["monetary"].mean(), 'BRL', locale='pt_BR'))
+    # with col3:
+        # st.metric(label="Monetary", value=format_currency(monetary_df["monetary"].mean(), 'BRL', locale='pt_BR'))
 
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
@@ -207,17 +207,17 @@ def main():
 
     st.subheader("Geospatial Analysis", divider=True)
 
-    brazil_map = gpd.read_file("../br_shp/br.shp")
-    brazil_map['id'] = brazil_map['id'].str.replace('BR', '')
-    grouped_df = all_df.groupby("geolocation_state").agg({"order_id": "count"}).reset_index()
+    # brazil_map = gpd.read_file("../br_shp/br.shp")
+    # brazil_map['id'] = brazil_map['id'].str.replace('BR', '')
+    # grouped_df = all_df.groupby("geolocation_state").agg({"order_id": "count"}).reset_index()
 
-    brazil_map = brazil_map.merge(grouped_df, left_on="id", right_on="geolocation_state", how="left")
+    # brazil_map = brazil_map.merge(grouped_df, left_on="id", right_on="geolocation_state", how="left")
 
-    fig, ax = plt.subplots(figsize=(20, 10))
-    brazil_map.boundary.plot(ax=ax)
-    brazil_map.plot(column="order_id", cmap="coolwarm", legend=True, ax=ax)
-    plt.title("Total Sales by State")
-    st.pyplot(fig)
+    # fig, ax = plt.subplots(figsize=(20, 10))
+    # brazil_map.boundary.plot(ax=ax)
+    # brazil_map.plot(column="order_id", cmap="coolwarm", legend=True, ax=ax)
+    # plt.title("Total Sales by State")
+    # st.pyplot(fig)
 
 if __name__ == "__main__":
     main()
