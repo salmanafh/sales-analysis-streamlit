@@ -1,6 +1,6 @@
 absl-py==2.1.0
 altair==5.4.1
-asttokens @ file:///home/conda/feedstock_root/build_artifacts/asttokens_1698341106958/work
+asttokens
 astunparse==1.6.3
 attrs==24.2.0
 babel==2.16.0
