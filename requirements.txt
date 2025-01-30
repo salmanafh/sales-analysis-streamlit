@@ -1,7 +1,0 @@
-streamlit
-numpy
-pandas
-seaborn
-matplotlib
-geopandas
-babel
